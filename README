@@ -1,0 +1,14 @@
+SUDOKU
+The goal of Sudoku is to fill every box in the entire
+nine by nine grid with numbers. Everyt column, row and 
+3x3 box within the grid must contaib the numbers 1 to 9
+. Each number can only occur once within each scenario. 
+
+The program must be able to analyse all possible 
+combinations to work out what number must go in each
+cell. 
+
+We are developing an algorythmn to solve a simple 
+Sudoku. 
+
+Here we go!
