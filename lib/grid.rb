@@ -1,16 +1,22 @@
+require_relative 'cell'
+
 class Grid 
 
-  attr_reader :cells
+  attr_accessor :cells
+  # reminder of what accessor does - its a method that can write and read to @cells!
+  # def cells(cells)
+  #   @cells = cells
+  # end
   # def cells
   #   @cells
   # end
 
   def initialize(puzzle)
-    @cells = puzzle
+    @cells = puzzle.chars.map {|number| Cell.new(number.to_i)}
   end
 
   def rows
-    @cells.split(//).map(&:to_i).each_slice(9).to_a
+    @cells.each_slice(9).to_a
   end
 
   def columns
@@ -19,9 +25,15 @@ class Grid
 
   def box
     rows.map{|row| row.each_slice(3).to_a}.transpose.flatten.each_slice(9).to_a
-
   end
  
+  def each_empty_cell
+    #turn them into an array of elements (yes its DRY but roll with it!!)
+    #the contents of the cell need to be indexed.. !!!
+    
+    #iterate over each element and return it if it equals zero 
+    @cells.select { |c| c.zero?  }
+  end
 
 
 

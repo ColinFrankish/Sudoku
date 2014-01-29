@@ -4,21 +4,17 @@ class Cell
 
     attr_accessor :value
 
-    def initialize(neighbours)
-      #@neighbours = neighbours[] # write this as a method???
-      @value = nil
+    def initialize(value)
+      
+      @value = value
+    end
+
+    def zero?
+        @value.zero?
     end
 
 
-    # def filled_out?
-
-    # end
-
     
-    # def candidates
-
-    # end
-
     # def solve
 
     # end
