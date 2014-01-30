@@ -9,8 +9,8 @@ describe 'cell' do
   
   #let(:puzzle) {'015003002000100906270068430490002017501040380003905000900081040860070025037204600'}
   
- it "should know if its value is 0 " do
-      expect(grid.cells.first.incomplete?).to be_true
+ it "should know if it is solved " do
+      expect(grid.cells.first.solved?).to be_false
   end
 
  

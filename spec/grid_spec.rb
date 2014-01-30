@@ -51,14 +51,15 @@ describe 'Grid' do
     expect(grid.box_for_cell(grid.cells.first).collect{|cell| cell.value}).to eq [0,1,5,0,0,0,2,7,0]
   end
 
-
-
-
-  # it "should know what its candidates are"  do
-
-  #   expect(grid.cells.first.candidates).to eq[6]
-  # end
-
+  it "should know what its candidates are"  do
+    expect(grid.candidates_for_cell(grid.cells.first)).to eq [6]
+  end
+  it "should know if it is solved" do
+    #the grid should return false if any of the cells are unsolved
+    expect(grid.solved?).to eq(false)
+    grid.solve!
+    expect(grid.solved?).to eq(true)
+  end
 end
 end
 

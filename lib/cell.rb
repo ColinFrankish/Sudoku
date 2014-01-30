@@ -9,8 +9,8 @@ class Cell
       @grid = grid
     end
 
-    def incomplete?
-      value == 0
+    def solved?
+      value != 0
     end
 
 

@@ -29,7 +29,7 @@ class Grid
  
   def each_empty_cell
     #iterate over each element and return it if it equals zero 
-    @cells.select { |c| c.incomplete?  }
+    @cells.select { |c| !c.solved?  }
   end
 
   def missing_values(cells)
@@ -48,11 +48,42 @@ class Grid
     boxes.detect{|box| box.include? cell}
   end
 
-  def candidates
-
+  def candidates_for_cell(cell)
+    row = row_for_cell(cell).collect{|cell| cell.value}
+    col = column_for_cell(cell).collect{|cell| cell.value}
+    box = box_for_cell(cell).collect{|cell| cell.value}
+    
+    (1..9).to_a - row - col - box
   end
 
+  def solved?
+    @cells.all?(&:solved?)
+  end
 
+  def solve!
+    rows.each do |row|
+      row.each{|cell| print cell.value}
+      puts ""
+    end
+    
+    while not solved?
+      puts "Beginning iteration..."
+      @cells.each do |cell|
+        puts 'cell already solved, skipping' if cell.solved?
+        next if cell.solved?
+        
+        candidates = candidates_for_cell(cell)
+
+        puts candidates.length == 1 ? 'Found one possible solution for cell' : 'Multiple options found for cell OMG'
+        candidates.length == 1 ? cell.value = candidates.first : next
+      end
+    end
+
+    rows.each do |row|
+      row.each{|cell| print cell.value}
+      puts ""
+    end
+  end
 
   #def fill_empty_cells(each_empty_cell)
   #  each_empty_cell.
