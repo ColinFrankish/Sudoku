@@ -12,7 +12,7 @@ class Grid
   # end
 
   def initialize(puzzle)
-    @cells = puzzle.chars.map {|number| Cell.new(number.to_i)}
+    @cells = puzzle.chars.map {|number| Cell.new(number.to_i, self)}
   end
 
   def rows
@@ -23,17 +23,21 @@ class Grid
     rows.transpose
   end
 
-  def box
+  def boxes
     rows.map{|row| row.each_slice(3).to_a}.transpose.flatten.each_slice(9).to_a
   end
  
   def each_empty_cell
-    #turn them into an array of elements (yes its DRY but roll with it!!)
-    #the contents of the cell need to be indexed.. !!!
-    
     #iterate over each element and return it if it equals zero 
-    @cells.select { |c| c.zero?  }
+    @cells.select { |c| c.incomplete?  }
   end
+
+  def missing_values(cells)
+    (1..9).to_a - cells.collect{|cell| cell.value}
+
+  end
+  #def fill_empty_cells(each_empty_cell)
+  #  each_empty_cell.
 
 
 
