@@ -4,22 +4,13 @@ class Cell
 
     attr_accessor :value
 
-    def initialize(value, grid)
+    def initialize(value)
       @value = value
-      @grid = grid
     end
 
     def solved?
       value != 0
     end
-
-
-
-
-    
-    # def solve
-
-    # end
 
 end
 

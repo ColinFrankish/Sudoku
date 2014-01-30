@@ -12,7 +12,7 @@ class Grid
   # end
 
   def initialize(puzzle)
-    @cells = puzzle.chars.map {|number| Cell.new(number.to_i, self)}
+    @cells = puzzle.chars.map {|number| Cell.new(number.to_i)}
   end
 
   def rows
@@ -68,6 +68,8 @@ class Grid
     
     while not solved?
       puts "Beginning iteration..."
+      changes_made = false
+      
       @cells.each do |cell|
         puts 'cell already solved, skipping' if cell.solved?
         next if cell.solved?
@@ -75,8 +77,16 @@ class Grid
         candidates = candidates_for_cell(cell)
 
         puts candidates.length == 1 ? 'Found one possible solution for cell' : 'Multiple options found for cell OMG'
-        candidates.length == 1 ? cell.value = candidates.first : next
+        
+        if candidates.length == 1 
+          cell.value = candidates.first
+          changes_made = true
+        else
+          next
+        end
       end
+
+      break unless changes_made
     end
 
     rows.each do |row|
@@ -85,27 +95,6 @@ class Grid
     end
   end
 
-  #def fill_empty_cells(each_empty_cell)
-  #  each_empty_cell.
-
-
-
-
-  # def solve
-  #   # outstanding_before, looping = SIZE, false
-  #   # while !solved? && !looping
-  #   #   try_to_solve # ask each cell to solve itself
-  #   #   outstanding         = @cells.count {|c| c.solved? }
-  #   #   looping             = outstanding_before == outstanding       
-  #   #   outstanding_before  = outstanding 
-  # end
-
-  # def solved? 
-
-  # end
-
-  # def inspect
-
-  # end
+  #
 
 end
