@@ -45,7 +45,19 @@ describe 'Grid' do
     expect(grid.missing_values(grid.columns[0])).to eq [1,3,6,7]
     expect(grid.missing_values(grid.boxes[0])).to eq [3,4,6,8,9]
   end
+  it "should locate a cell in the grid" do
+    expect(grid.row_for_cell(grid.cells.first).collect{|cell| cell.value}).to eq [0,1,5,0,0,3,0,0,2]
+    expect(grid.column_for_cell(grid.cells.first).collect{|cell| cell.value}).to eq [0,0,2,4,5,0,9,8,0]
+    expect(grid.box_for_cell(grid.cells.first).collect{|cell| cell.value}).to eq [0,1,5,0,0,0,2,7,0]
+  end
 
+
+
+
+  # it "should know what its candidates are"  do
+
+  #   expect(grid.cells.first.candidates).to eq[6]
+  # end
 
 end
 end

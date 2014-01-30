@@ -34,8 +34,26 @@ class Grid
 
   def missing_values(cells)
     (1..9).to_a - cells.collect{|cell| cell.value}
+  end
+
+  def row_for_cell(cell)
+    rows.detect{|row| row.include? cell }
+  end
+
+  def column_for_cell(cell)
+    columns.detect{|column| column.include? cell}
+  end
+
+  def box_for_cell(cell)
+    boxes.detect{|box| box.include? cell}
+  end
+
+  def candidates
 
   end
+
+
+
   #def fill_empty_cells(each_empty_cell)
   #  each_empty_cell.
 
