@@ -61,11 +61,6 @@ class Grid
   end
 
   def solve!
-    row = rows.first.map {|cell| cell.value}
-    if row != [8, 1, 2, 3, 5, 4, 6, 7, 9]
-      print row
-      puts ''
-    end
     while not solved?
       # puts "Beginning iteration..."
       changes_made = false
@@ -73,9 +68,7 @@ class Grid
       @cells.each do |cell|
         # puts 'cell already solved, skipping' if cell.solved?
         next if cell.solved?
-        
         candidates = candidates_for_cell(cell)
-
         # puts candidates.length == 1 ? 'Found one possible solution for cell' : 'Multiple options found for cell OMG'
         if candidates.length == 0
           return        
@@ -108,7 +101,7 @@ class Grid
       puts ''
     end
 
-    # puts 'Trying harder'
+     puts 'Trying harder'
     @cells.each_with_index do |cell, cell_index| 
       if not cell.solved?
         candidates = self.candidates_for_cell(cell)
@@ -118,8 +111,13 @@ class Grid
           new_grid.cells[cell_index].value = candidate 
           new_grid.solve!
 
-          return if new_grid.solved?
+          break if new_grid.solved? 
+        #   rows.each do |row|
+        #   row.each{|cell| print cell.value}
+        #   puts ""
+        # end
         end
+        break
       end
     end
 
