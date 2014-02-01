@@ -4,7 +4,9 @@ describe 'Grid' do
   context "initialization" do
   let(:puzzle) { '015003002000100906270068430490002017501040380003905000900081040860070025037204600'}
   let(:grid)   { Grid.new(puzzle)}
-
+  let(:puzzle_hard) { '800000000003600000070090200050007000000045700000100030001000068008500010090000400'}
+  let(:grid_hard)   { Grid.new(puzzle_hard)}
+  
   def values_for(cells)
     cells.map  {|c| c.value}
   end
@@ -59,6 +61,22 @@ describe 'Grid' do
     expect(grid.solved?).to eq(false)
     grid.solve!
     expect(grid.solved?).to eq(true)
+  end
+  it 'should make a deep copy of the grid' do
+    grid1 = Grid.new(puzzle)
+    grid2 = grid1.dup
+    expect(grid1).not_to eq(grid2)
+    expect(grid1.cells.map { |cell| cell.value }).to eq(grid2.cells.map { |cell| cell.value })
+    grid2.cells[0].value = 2
+    expect(grid1.cells.map { |cell| cell.value }).not_to eq(grid2.cells.map { |cell| cell.value })
+    puts grid1.cells[0].value
+  end
+
+  it "should solve a hard problem" do
+    #the grid should return false if any of the cells are unsolved
+    expect(grid_hard.solved?).to eq(false)
+    grid_hard.solve!
+    expect(grid_hard.solved?).to eq(true)
   end
 end
 end
