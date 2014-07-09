@@ -11,4 +11,6 @@ cell.
 We are developing an algorythmn to solve a simple 
 Sudoku. 
 
-Here we go!
+`````
+This can be run using rspec command in terminal
+`````

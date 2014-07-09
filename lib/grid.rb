@@ -111,7 +111,7 @@ class Grid
           new_grid.cells[cell_index].value = candidate 
           new_grid.solve!
 
-          break if new_grid.solved? 
+          return if new_grid.solved? 
         #   rows.each do |row|
         #   row.each{|cell| print cell.value}
         #   puts ""
